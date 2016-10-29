@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>水平导航菜单3</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		ul,ol{
+			list-style: none;
+		}
+		.main-menu{
+			width: 100px;
+			height: 20px;
+			float: left;
+			border: 1px solid black;
+			margin-right: 2px;
+			text-align: center;
+			line-height: 20px;
+		}
+		.main-menu h3{
+			background: url(img/arrow.jpg) no-repeat right 3px;
+		}
+		.sub-menu{
+			/*width: 100px;*/
+			border: 1px solid black;
+			display: none;
+		}
+		.sub-menu li:hover{
+			background: gray;
+			color: white;
+		}
+
+	</style>
+</head>
+<body>
+	<ul id="container">
+		<li class="main-menu">
+			<h3>item1</h3>
+			<ul class="sub-menu">
+				<li>001</li>
+				<li>002</li>
+				<li>003</li>
+			</ul>
+		</li>
+		<li class="main-menu">
+			<h3>item2</h3>
+			<ul class="sub-menu">
+				<li>001</li>
+				<li>002</li>
+				<li>003</li>
+			</ul>
+		</li>
+		<li class="main-menu">
+			<h3>item3</h3>
+			<ul class="sub-menu">
+				<li>001</li>
+				<li>002</li>
+				<li>003</li>
+			</ul>
+		</li>
+		<li class="main-menu">
+			<h3>item4</h3>
+			<ul class="sub-menu">
+				<li>001</li>
+				<li>002</li>
+				<li>003</li>
+			</ul>
+		</li>
+	</ul>
+	<script>
+		var oContainer = document.getElementById('container');
+		var aMainMenu = oContainer.getElementsByTagName('li');
+		var aSubMenu = oContainer.getElementsByTagName('ul');
+		for(var i=0; i<aMainMenu.length; i++){
+			if(aMainMenu[i].className == 'main-menu'){
+				aMainMenu[i].onmouseover = function(){
+					this.getElementsByTagName('h3')[0].style.backgroundPosition = 'right -15px';
+					// this.children[0].style.backgroundPosition = 'right -15px';
+					this.children[1].style.display = 'block';
+				};
+				aMainMenu[i].onmouseout = function(){
+					this.children[0].style.backgroundPosition = 'right 3px';
+					this.children[1].style.display = 'none';
+				};
+			}
+		}
+
+
+
+
+
+	</script>
+
+</body>
+</html>
