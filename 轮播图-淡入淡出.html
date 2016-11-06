@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -35,6 +35,7 @@
 			line-height: 20px;
 			float: left;
 			margin-right: 10px;
+			cursor: pointer;
 		}
 		#tab .selected{
 			background: orange;
@@ -83,13 +84,13 @@
 		var zIndex = 4;
 		var nowIdx = 0;
 		var timer;
-		for(var i=0; i<aImg.length; i++){
-			aImg[i].style.zIndex = aImg.length - i;
-		}
+		
 		for(var i=0; i<aLi.length; i++){
+			aImg[i].style.zIndex = aImg.length - i;
 			aLi[i].index = i;
 			aLi[i].onmouseover = function(){
 				changeImg(this.index);
+				nowIdx = this.index;
 			};
 		}
 
