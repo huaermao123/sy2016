@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>放大镜</title>
+	<style>
+		#small-box{
+			width: 400px;
+			height: 300px;
+			position: relative;
+			float: left;
+		}
+		#small-img{
+			width: 400px;
+			height: 300px;
+			border: 1px solid #000;
+		}
+		#mask{
+			width: 400px;
+			height: 300px;
+			background: gray;
+			position: absolute;
+			top: 0;
+			left: 0;
+			opacity: 0;
+			filter: alpha(opacity=0);
+		}
+		#float{
+			width: 80px;
+			height: 80px;
+			background: #ccc;
+			position: absolute;
+			top: 0;
+			left: 0;
+			opacity: 0.6;
+			filter: alpha(opacity=60);
+			display: none;
+		}
+		#big-box{
+			width: 400px;
+			height: 300px;
+			border: 1px solid #000;
+			overflow: hidden;
+			float: left;
+			margin-left: 20px;
+			display: none;
+			position: relative;
+		}
+		#big-img{
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="small-box">
+		<img src="1.jpg" alt="" id="small-img">
+		<div id="float"></div>
+		<div id="mask"></div>
+	</div>
+	<div id="big-box">
+		<img src="1.jpg" alt="" id="big-img">
+	</div>
+	<script>
+		var oSmallBox = document.getElementById('small-box');
+
+		var oFloat = document.getElementById('float');
+		var oBigBox = document.getElementById('big-box');
+		var oBigImg = document.getElementById('big-img');
+		oSmallBox.onmouseover = function(){
+			oFloat.style.display = 'block';
+			oBigBox.style.display = 'block';
+		};
+
+		oSmallBox.onmousemove = function(e){
+			e = e || window.event;
+			var iLeft = e.clientX - oFloat.offsetWidth / 2;
+			var iTop = e.clientY - oFloat.offsetHeight / 2;
+			if(iLeft <= 0){
+				iLeft = 0;
+			}
+			if(iLeft >= oSmallBox.offsetWidth - oFloat.offsetWidth){
+				iLeft = oSmallBox.offsetWidth - oFloat.offsetWidth;
+			}
+			if(iTop < 0){
+				iTop = 0;
+			}
+			if(iTop >= oSmallBox.offsetHeight - oFloat.offsetHeight){
+				iTop = oSmallBox.offsetHeight - oFloat.offsetHeight;
+			}
+			oFloat.style.left = iLeft + 'px';
+			oFloat.style.top = iTop + 'px';
+			var fScaleX = iLeft / (oSmallBox.offsetWidth - oFloat.offsetWidth);
+			var fScaleY = iTop / (oSmallBox.offsetHeight - oFloat.offsetHeight);
+			oBigImg.style.left = -fScaleX * (oBigImg.offsetWidth - oBigBox.offsetWidth) + 'px';
+			oBigImg.style.top = -fScaleY * (oBigImg.offsetHeight - oBigBox.offsetHeight) + 'px';
+		};
+
+		oSmallBox.onmouseout = function(){
+			oFloat.style.display = 'none';
+			oBigBox.style.display = 'none';
+		};
+	</script>
+</body>
+</html>
